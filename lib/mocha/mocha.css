@@ -1,5 +1,5 @@
 @charset "utf-8";
-body {
+/*body {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +59,7 @@ form {
 input {
   flex-grow: 1;
   padding: 0.5em;
-}
+}*/
 
 #mocha {
   font: 20px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;

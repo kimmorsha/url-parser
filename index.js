@@ -120,7 +120,7 @@ function getScheme(url) {
 	scheme =  scheme[0]
 	
 
-	document.getElementById("scheme").innerHTML = "scheme: " + scheme
+	// document.getElementById("scheme").innerHTML = "scheme: " + scheme
 	return scheme;
 }
 
@@ -140,7 +140,7 @@ function getUsername(url) {
 	}
 	
 
-	document.getElementById("username").innerHTML = "username: " + username
+	// document.getElementById("username").innerHTML = "username: " + username
 	return username
 }
 
@@ -156,7 +156,7 @@ function getPassword(url) {
     	password = decodeURIComponent(password)
 	}
 	
-	document.getElementById("password").innerHTML = "password: " + password
+	// document.getElementById("password").innerHTML = "password: " + password
 	return password
 }
 
@@ -169,7 +169,7 @@ function getHost(url) {
 		return null;
 	}
 	
-	document.getElementById("host").innerHTML = "host: " + host
+	// document.getElementById("host").innerHTML = "host: " + host
 	return host
 }
 
@@ -191,7 +191,7 @@ function getPort(url) {
 		port = '80';
 	} 
 
-	document.getElementById("port").innerHTML = "port: " + port
+	// document.getElementById("port").innerHTML = "port: " + port
 	return port
 }
 
@@ -212,7 +212,7 @@ function getPath(url) {
 	}
 
 	
-	document.getElementById("path").innerHTML = "path: " + path
+	// document.getElementById("path").innerHTML = "path: " + path
 	return path
 }
 
@@ -231,7 +231,7 @@ function getQuery(url) {
         query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
     }
 
-	document.getElementById("query").innerHTML = "query: " + query
+	// document.getElementById("query").innerHTML = "query: " + query
     return query;
 }
 
@@ -250,6 +250,6 @@ function getFragment(url) {
     	fragment = decodeURIComponent(fragment)
 	}
 	
-	document.getElementById("fragment").innerHTML = "fragment: " + fragment
+	// document.getElementById("fragment").innerHTML = "fragment: " + fragment
 	return fragment
 }
