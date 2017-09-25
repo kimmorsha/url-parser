@@ -1,3 +1,68 @@
+var ol = $('ol');
+
+function addMessage(urlString) {
+    // Chat messages should be follow the set chat message template
+    // (see index.html:15)
+    ol.empty();
+	ol.append('<li>' + urlString + '</li>');
+}
+
+function sendMessage(urlString) {
+    // This function sends a message to server via AJAX. See code at the bottom
+    // of this file for explanation on the different parts of this AJAX request.
+    // This sends a POST request to the server, and since we're not interested
+    // on the server's response, we didn't have to listen for the "readystatechange"
+    // event anymore.
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'http://localhost:3000/url');
+	xhr.send(urlString);
+}
+
+function addResult(resultMessage){
+	//this function adds the result message
+	p.empty();
+	p.append('<li>' + resultMessage + '</li>');
+}
+function fetchMessages() {
+    // This function fetches the messages from the server via AJAX. See code at
+    // the bottom of this file for explanation on the different parts of this
+    // AJAX request.
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === xhr.DONE) {
+			var messages = JSON.parse(xhr.responseText);
+			ol.empty();
+			messages.forEach(addMessage);
+		}
+	};
+	xhr.open('GET', 'http://localhost:3000/url');
+	xhr.send();
+}
+
+// In order to fetch messages from the server, we need to call the "fetchMessages"
+// function. With the code below, we are using "setInterval" to repeatedly call
+// "fetchMessages". (See https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval
+// for more info about setInterval). This technique of repeatedly sending AJAX
+// requests to the server to retrieve data or check if there's is new data is
+// called "polling".
+setInterval(fetchMessages, 100);
+
+$('button[type]').on('click', function(e) {
+	addMessage(e.target.textContent);
+	sendMessage(e.target.textContent);
+});
+
+var input = $('input');
+
+$('form').on('submit', function(e) {
+	e.preventDefault();
+	if (input.val()) {
+		addMessage(input.val());
+		sendMessage(input.val());
+		parse(input.val());
+		input.val('');
+	}
+});
 /**
  *  Parses the given URL into its different components.
  *
@@ -54,6 +119,8 @@ function getScheme(url) {
 	scheme =  scheme.split(":")
 	scheme =  scheme[0]
 	
+
+	document.getElementById("scheme").innerHTML = "scheme: " + scheme
 	return scheme;
 }
 
@@ -72,6 +139,8 @@ function getUsername(url) {
     	username = decodeURIComponent(username)
 	}
 	
+
+	document.getElementById("username").innerHTML = "username: " + username
 	return username
 }
 
@@ -87,6 +156,7 @@ function getPassword(url) {
     	password = decodeURIComponent(password)
 	}
 	
+	document.getElementById("password").innerHTML = "password: " + password
 	return password
 }
 
@@ -99,6 +169,7 @@ function getHost(url) {
 		return null;
 	}
 	
+	document.getElementById("host").innerHTML = "host: " + host
 	return host
 }
 
@@ -120,6 +191,7 @@ function getPort(url) {
 		port = '80';
 	} 
 
+	document.getElementById("port").innerHTML = "port: " + port
 	return port
 }
 
@@ -140,6 +212,7 @@ function getPath(url) {
 	}
 
 	
+	document.getElementById("path").innerHTML = "path: " + path
 	return path
 }
 
@@ -158,6 +231,7 @@ function getQuery(url) {
         query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
     }
 
+	document.getElementById("query").innerHTML = "query: " + query
     return query;
 }
 
@@ -176,5 +250,6 @@ function getFragment(url) {
     	fragment = decodeURIComponent(fragment)
 	}
 	
+	document.getElementById("fragment").innerHTML = "fragment: " + fragment
 	return fragment
 }
