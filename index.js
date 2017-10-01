@@ -3,8 +3,8 @@ var ol = $('ol');
 function addMessage(urlString) {
     // Chat messages should be follow the set chat message template
     // (see index.html:15)
-    ol.empty();
-	ol.append('<li>' + urlString + '</li>');
+    	ol.empty();
+    	ol.append('<li>' + urlString + '</li>');
 }
 
 function sendMessage(urlString) {
@@ -99,13 +99,12 @@ function parse(url) {
 	      username: _username,
 	      password: _password,
 	      host: _host,
-
 	      port: _port
 	    },
 
 	    path: _path,
 
-	   	query: _query,
+	    query: _query,
 	    fragment: _fragment	  
 	};
 
@@ -137,7 +136,7 @@ function getUsername(url) {
 	username = username[0]
 
 	if (username.match(/%[0-9a-f]{2}/i)) {
-    	username = decodeURIComponent(username)
+    		username = decodeURIComponent(username)
 	}
 	
 
@@ -216,9 +215,9 @@ function getPath(url) {
 
 	if ((path === '/') && (url.charAt(url.length-1) === '/')) {
 		return '/'
-	} else if ((path === '/') && (url.charAt(url.indexOf('?')-1) !== '/')) {
+	} else if ((path === '/') && isNotAfterSlash('?', url)) {
 		return ''
-	} else if ((path === '/') && (url.charAt(url.indexOf('#')-1) !== '/')) {
+	} else if ((path === '/') && isNotAfterSlash('#', url) {
 		return ''
 	} else if (path.match(/%[0-9a-f]{2}/i)) {
     	path = decodeURIComponent(path)
@@ -227,6 +226,9 @@ function getPath(url) {
 	
 	document.getElementById("path").innerHTML = "path: " + path
 	return path
+}
+function isNotAfterSlash(char, url) {
+	return url.charAt(url.indexOf(char)-1) !== '/';
 }
 
 function getQuery(url) {
@@ -238,14 +240,14 @@ function getQuery(url) {
 		return null;
 	}
 	query = {};
-    a = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
-    for (i = 0; i < a.length; i++) {
-        b = a[i].split('=');
-        query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
-    }
+    	a = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+    	for (i = 0; i < a.length; i++) {
+        	b = a[i].split('=');
+        	query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+    	}
 
 	document.getElementById("query").innerHTML = "query: " + query
-    return query;
+    	return query;
 }
 
 function getFragment(url) {
