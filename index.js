@@ -70,7 +70,7 @@ $('form').on('submit', function(e) {
  *  NOTE: You may implement additional functions as you need, as long as this
  *    function behaves as specified in the instructions. Have fun! :)
  **/
- 
+
 var _scheme;
 var _username;
 var _password;
@@ -221,12 +221,12 @@ function getQuery(url) {
 	parser = helpParser();
 	parser.href = url;
 
-	qstr = parser.search
-	if (qstr == '') {
+	queryString = parser.search
+	if (queryString == '') {
 		return null;
 	}
 	query = {};
-    a = (qstr[0] === '?' ? qstr.substr(1) : qstr).split('&');
+    a = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
     for (i = 0; i < a.length; i++) {
         b = a[i].split('=');
         query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
