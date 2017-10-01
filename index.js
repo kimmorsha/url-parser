@@ -70,18 +70,18 @@ $('form').on('submit', function(e) {
  *  NOTE: You may implement additional functions as you need, as long as this
  *    function behaves as specified in the instructions. Have fun! :)
  **/
-
-private var _scheme;
-private var _username;
-private var _password;
-private var _host;
-private var _port;
-private var _path;
-private var _query;
-private var _fragment;
+ 
+var _scheme;
+var _username;
+var _password;
+var _host;
+var _port;
+var _path;
+var _query;
+var _fragment;
 	
 
-private function parse(url) {
+function parse(url) {
 
 	_scheme = getScheme(url);
 	_username = getUsername(url);
@@ -112,7 +112,7 @@ private function parse(url) {
 	return obj;
 }
 
-private function getScheme(url) {
+function getScheme(url) {
 	parser = helpParser();
 	parser.href = url;
 
@@ -125,7 +125,7 @@ private function getScheme(url) {
 	return scheme;
 }
 
-private function getUsername(url) {
+function getUsername(url) {
 	parser = helpParser();
 	parser.href = url;
 
@@ -145,7 +145,7 @@ private function getUsername(url) {
 	return username
 }
 
-private function getPassword(url) {
+function getPassword(url) {
 	parser = helpParser();
 	parser.href = url;
 
@@ -161,7 +161,7 @@ private function getPassword(url) {
 	return password
 }
 
-private function getHost(url) {
+function getHost(url) {
 	parser = helpParser();
 	parser.href = url;
 
@@ -174,7 +174,7 @@ private function getHost(url) {
 	return host
 }
 
-private function getPort(url) {
+function getPort(url) {
 	parser = helpParser();
 	parser.href = url;
 
@@ -196,7 +196,7 @@ private function getPort(url) {
 	return port
 }
 
-private function getPath(url) {
+function getPath(url) {
 	parser = helpParser();
 	parser.href = url;
 
@@ -217,7 +217,7 @@ private function getPath(url) {
 	return path
 }
 
-private function getQuery(url) {
+function getQuery(url) {
 	parser = helpParser();
 	parser.href = url;
 
@@ -236,7 +236,7 @@ private function getQuery(url) {
     return query;
 }
 
-private function getFragment(url) {
+function getFragment(url) {
 	parser = helpParser();
 	parser.href = url;
 
@@ -255,6 +255,6 @@ private function getFragment(url) {
 	return fragment
 }
 
-private function helpParser() {
+function helpParser() {
 	return document.createElement('a');
 }
