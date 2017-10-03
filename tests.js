@@ -12,7 +12,7 @@ describe('Scheme checker', function() {
     var validurl = 'https://domain.com?poo=javascript%20decode%20uri%20%2B%20sign%20to%20space';
     var scheme = getScheme(validurl);
 
-    chai.assert.equal(scheme, "https");  
+    chai.assert.equal(scheme, "https");    
   });
    it('should return correct scheme', function() {
     var validurl = 'file:///home/arnelle/Documents/example.txt';
