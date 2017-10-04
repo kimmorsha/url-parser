@@ -13,7 +13,8 @@ var _host;
 var _port;
 var _path;
 var _query;
-var _fragment;
+var _fragment
+var parser = document.createElement('a');
 
 function parse(url) {
 
@@ -33,12 +34,13 @@ function parse(url) {
 	      username: _username,
 	      password: _password,
 	      host: _host,
+
 	      port: _port
 	    },
 
 	    path: _path,
 
-	    query: _query,
+	   	query: _query,
 	    fragment: _fragment	  
 	};
 
@@ -46,19 +48,16 @@ function parse(url) {
 }
 
 function getScheme(url) {
-	var parser = document.createElement('a');
 	parser.href = url;
 
 	var scheme = parser.protocol
 	scheme =  scheme.split(":")
 	scheme =  scheme[0]
 	
-	document.getElementById("scheme").innerHTML = "scheme: " + scheme
 	return scheme;
 }
 
 function getUsername(url) {
-	var parser = document.createElement('a');
 	parser.href = url;
 
 	var username = parser.username
@@ -69,15 +68,13 @@ function getUsername(url) {
 	username = username[0]
 
 	if (username.match(/%[0-9a-f]{2}/i)) {
-    		username = decodeURIComponent(username)
+    	username = decodeURIComponent(username)
 	}
-
-	document.getElementById("username").innerHTML = "username: " + username	
+	
 	return username
 }
 
 function getPassword(url) {
-	var parser = document.createElement('a');
 	parser.href = url;
 
 	var password = parser.password
@@ -87,13 +84,11 @@ function getPassword(url) {
 	if (password.match(/%[0-9a-f]{2}/i)) {
     	password = decodeURIComponent(password)
 	}
-
-	document.getElementById("password").innerHTML = "password: " + password
+	
 	return password
 }
 
 function getHost(url) {
-	var parser = document.createElement('a');
 	parser.href = url;
 
 	var host = parser.hostname
@@ -101,12 +96,10 @@ function getHost(url) {
 		return null;
 	}
 	
-	document.getElementById("host").innerHTML = "host: " + host
 	return host
 }
 
 function getPort(url) {
-	var parser = document.createElement('a');
 	parser.href = url;
 
 	var port = parser.port
@@ -123,36 +116,29 @@ function getPort(url) {
 		port = '80';
 	} 
 
-	document.getElementById("port").innerHTML = "port: " + port
 	return port
 }
 
 function getPath(url) {
-	var parser = document.createElement('a');
 	parser.href = url;
 
 	var path = parser.pathname
 
 	if ((path === '/') && (url.charAt(url.length-1) === '/')) {
 		return '/'
-	} else if ((path === '/') && isNotAfterSlash('?', url)) {
+	} else if ((path === '/') && (url.charAt(url.indexOf('?')-1) !== '/')) {
 		return ''
-	} else if ((path === '/') && isNotAfterSlash('#', url)) {
+	} else if ((path === '/') && (url.charAt(url.indexOf('#')-1) !== '/')) {
 		return ''
 	} else if (path.match(/%[0-9a-f]{2}/i)) {
     	path = decodeURIComponent(path)
 	}
 
-	document.getElementById("path").innerHTML = "path: " + path
+	
 	return path
 }
 
-function isNotAfterSlash(char, url) {
-	return url.charAt(url.indexOf(char)-1) !== '/';
-}
-
 function getQuery(url) {
-	var parser = document.createElement('a');
 	parser.href = url;
 
 	var qstr = parser.search
@@ -165,12 +151,11 @@ function getQuery(url) {
         var b = a[i].split('=');
         query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
     }
-	document.getElementById("query").innerHTML = "query: " + query
+
     return query;
 }
 
 function getFragment(url) {
-	var parser = document.createElement('a');
 	parser.href = url;
 
 	var fragment = parser.hash;
@@ -184,10 +169,5 @@ function getFragment(url) {
     	fragment = decodeURIComponent(fragment)
 	}
 	
-	document.getElementById("fragment").innerHTML = "fragment: " + fragment
 	return fragment
 }
-
-function helpParser() {
-  	return document.createElement('a');
-} 
