@@ -50,7 +50,7 @@ function parse(url) {
 function getScheme(url) {
 	parser.href = url;
 
-	var scheme = parser.protocol
+	scheme = parser.protocol
 	scheme =  scheme.split(":")
 	scheme =  scheme[0]
 	
@@ -102,20 +102,31 @@ function getHost(url) {
 function getPort(url) {
 	parser.href = url;
 
+	const HTTPS_SCHEME = 'https';
+ 	const SSH_SCHEME = 'ssh';
+ 	const FTP_SCHEME = 'ftp';
+ 	const HTTP_HOST = 'http';
+ 
+ 	const HTTPS_PORT = '443';
+ 	const SSH_PORT = '22';
+ 	const FTP_PORT = '21';
+ 	const HTTP_PORT = '80';
+ 
+ 	const EMPTY = ''; 
+
 	var port = parser.port
 	
-	if (_scheme === 'https' && port === '') {
-		port = '443';
-	} else if (_scheme === 'ssh' && port === '') {
-		port = '22';
-	} else if (_scheme === 'ftp' && port === '') {
-		port = '21';
-	} else if (_host === null && port === '') {
-		port = null;
-	} else if (_host !== 'http' && port === '') {
-		port = '80';
-	} 
-
+	if (_scheme === HTTPS_SCHEME && port === EMPTY) {
+ 		port = HTTPS_PORT;
+ 	} else if (_scheme === SSH_SCHEME && port === EMPTY) {
+ 		port = SSH_PORT;
+ 	} else if (_scheme === FTP_SCHEME && port === EMPTY) {
+ 		port = FTP_PORT;
+ 	} else if (_host === null && port === EMPTY) {
+ 		port = null;
+ 	} else if (_host !== HTTP_HOST && port === EMPTY) {
+ 		port = HTTP_PORT;
+  	} 
 	return port
 }
 
