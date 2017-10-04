@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var ol = $('ol');
 
 function addMessage(urlString) {
@@ -63,6 +64,8 @@ $('form').on('submit', function(e) {
 		input.val('');
 	}
 });
+=======
+>>>>>>> d6f695ab3a4c4ae499da1b5802a53f9c71b1ba67
 /**
  *  Parses the given URL into its different components.
  *
@@ -79,7 +82,6 @@ var _port;
 var _path;
 var _query;
 var _fragment;
-	
 
 function parse(url) {
 
@@ -91,8 +93,8 @@ function parse(url) {
 	_path = getPath(url);
 	_query = getQuery(url);
 	_fragment = getFragment(url);
-
-	obj = {
+	
+	var obj = {
 	    scheme: _scheme,
 
 	    authority: {
@@ -112,23 +114,21 @@ function parse(url) {
 }
 
 function getScheme(url) {
-	parser = helpParser();
+	var parser = document.createElement('a');
 	parser.href = url;
 
-	scheme = parser.protocol
+	var scheme = parser.protocol
 	scheme =  scheme.split(":")
 	scheme =  scheme[0]
 	
-
-	document.getElementById("scheme").innerHTML = "scheme: " + scheme
 	return scheme;
 }
 
 function getUsername(url) {
-	parser = helpParser();
+	var parser = document.createElement('a');
 	parser.href = url;
 
-	username = parser.username
+	var username = parser.username
 	if (username == '') {
 		return null;
 	}
@@ -139,16 +139,14 @@ function getUsername(url) {
     		username = decodeURIComponent(username)
 	}
 	
-
-	document.getElementById("username").innerHTML = "username: " + username
 	return username
 }
 
 function getPassword(url) {
-	parser = helpParser();
+	var parser = document.createElement('a');
 	parser.href = url;
 
-	password = parser.password
+	var password = parser.password
 	if (password == '') {
 		return null;
 	}
@@ -156,62 +154,47 @@ function getPassword(url) {
     	password = decodeURIComponent(password)
 	}
 	
-	document.getElementById("password").innerHTML = "password: " + password
 	return password
 }
 
 function getHost(url) {
-	parser = helpParser();
+	var parser = document.createElement('a');
 	parser.href = url;
 
-	host = parser.hostname
+	var host = parser.hostname
 	if (host == '') {
 		return null;
 	}
 	
-	document.getElementById("host").innerHTML = "host: " + host
 	return host
 }
 
 function getPort(url) {
-	parser = helpParser();
+	var parser = document.createElement('a');
 	parser.href = url;
 
-	const HTTPS_SCHEME = 'https';
-	const SSH_SCHEME = 'ssh';
-	const FTP_SCHEME = 'ftp';
-	const HTTP_HOST = 'http';
-
-	const HTTPS_PORT = '443';
-	const SSH_PORT = '22';
-	const FTP_PORT = '21';
-	const HTTP_PORT = '80';
-
-	const EMPTY = ''; 
-
-	port = parser.port
+	var port = parser.port
 	
-	if (_scheme === HTTPS_SCHEME && port === EMPTY) {
-		port = HTTPS_PORT;
-	} else if (_scheme === SSH_SCHEME && port === EMPTY) {
-		port = SSH_PORT;
-	} else if (_scheme === FTP_SCHEME && port === EMPTY) {
-		port = FTP_PORT;
-	} else if (_host === null && port === EMPTY) {
+	if (_scheme === 'https' && port === '') {
+		port = '443';
+	} else if (_scheme === 'ssh' && port === '') {
+		port = '22';
+	} else if (_scheme === 'ftp' && port === '') {
+		port = '21';
+	} else if (_host === null && port === '') {
 		port = null;
-	} else if (_host !== HTTP_HOST && port === EMPTY) {
-		port = HTTP_PORT;
+	} else if (_host !== 'http' && port === '') {
+		port = '80';
 	} 
 
-	document.getElementById("port").innerHTML = "port: " + port
 	return port
 }
 
 function getPath(url) {
-	parser = helpParser();
+	var parser = document.createElement('a');
 	parser.href = url;
 
-	path = parser.pathname
+	var path = parser.pathname
 
 	if ((path === '/') && (url.charAt(url.length-1) === '/')) {
 		return '/'
@@ -224,7 +207,6 @@ function getPath(url) {
 	}
 
 	
-	document.getElementById("path").innerHTML = "path: " + path
 	return path
 }
 function isNotAfterSlash(char, url) {
@@ -232,13 +214,14 @@ function isNotAfterSlash(char, url) {
 }
 
 function getQuery(url) {
-	parser = helpParser();
+	var parser = document.createElement('a');
 	parser.href = url;
 
-	queryString = parser.search
-	if (queryString == '') {
+	var qstr = parser.search
+	if (qstr == '') {
 		return null;
 	}
+<<<<<<< HEAD
 	query = {};
     	a = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
     	for (i = 0; i < a.length; i++) {
@@ -248,13 +231,23 @@ function getQuery(url) {
 
 	document.getElementById("query").innerHTML = "query: " + query
     	return query;
+=======
+	var query = {};
+    var a = (qstr[0] === '?' ? qstr.substr(1) : qstr).split('&');
+    for (var i = 0; i < a.length; i++) {
+        var b = a[i].split('=');
+        query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+    }
+
+    return query;
+>>>>>>> d6f695ab3a4c4ae499da1b5802a53f9c71b1ba67
 }
 
 function getFragment(url) {
-	parser = helpParser();
+	var parser = document.createElement('a');
 	parser.href = url;
 
-	fragment = parser.hash;
+	var fragment = parser.hash;
 	if (fragment == '') {
 		return null;
 	}
@@ -265,10 +258,5 @@ function getFragment(url) {
     	fragment = decodeURIComponent(fragment)
 	}
 	
-	document.getElementById("fragment").innerHTML = "fragment: " + fragment
 	return fragment
-}
-
-function helpParser() {
-	return document.createElement('a');
 }
