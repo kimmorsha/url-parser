@@ -50,7 +50,7 @@ function parse(url) {
 function getScheme(url) {
 	parser.href = url;
 
-	scheme = parser.protocol
+	var scheme = parser.protocol
 	scheme =  scheme.split(":")
 	scheme =  scheme[0]
 	
@@ -137,15 +137,14 @@ function getPath(url) {
 
 	if ((path === '/') && (url.charAt(url.length-1) === '/')) {
 		return '/'
-	} else if ((path === '/') && (url.charAt(url.indexOf('?')-1) !== '/')) {
-		return ''
-	} else if ((path === '/') && (url.charAt(url.indexOf('#')-1) !== '/')) {
-		return ''
-	} else if (path.match(/%[0-9a-f]{2}/i)) {
+	} else if ((path === '/') && isNotAfterSlash('?', url)) {
+  		return ''
+	} else if ((path === '/') && isNotAfterSlash('#', url)) {
+  		return ''
+  	} else if (path.match(/%[0-9a-f]{2}/i)) {
     	path = decodeURIComponent(path)
 	}
 
-	
 	return path
 }
 
@@ -158,10 +157,11 @@ function getQuery(url) {
 	}
 	var query = {};
     var a = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
-    for (var i = 0; i < a.length; i++) {
-        var b = a[i].split('=');
-        query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
-    }
+	
+	for (i = 0; i < a.length; i++) {
+    	b = a[i].split('=');
+    	query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+   	}
 
     return query;
 }
@@ -181,4 +181,8 @@ function getFragment(url) {
 	}
 	
 	return fragment
+}
+
+function isNotAfterSlash(char, url) {
+	return url.charAt(url.indexOf(char)-1) !== '/';
 }
