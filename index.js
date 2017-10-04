@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var ol = $('ol');
 
 function addMessage(urlString) {
@@ -64,8 +63,6 @@ $('form').on('submit', function(e) {
 		input.val('');
 	}
 });
-=======
->>>>>>> d6f695ab3a4c4ae499da1b5802a53f9c71b1ba67
 /**
  *  Parses the given URL into its different components.
  *
@@ -121,6 +118,7 @@ function getScheme(url) {
 	scheme =  scheme.split(":")
 	scheme =  scheme[0]
 	
+	document.getElementById("scheme").innerHTML = "scheme: " + scheme
 	return scheme;
 }
 
@@ -138,7 +136,8 @@ function getUsername(url) {
 	if (username.match(/%[0-9a-f]{2}/i)) {
     		username = decodeURIComponent(username)
 	}
-	
+
+	document.getElementById("username").innerHTML = "username: " + username	
 	return username
 }
 
@@ -153,7 +152,8 @@ function getPassword(url) {
 	if (password.match(/%[0-9a-f]{2}/i)) {
     	password = decodeURIComponent(password)
 	}
-	
+
+	document.getElementById("password").innerHTML = "password: " + password
 	return password
 }
 
@@ -166,6 +166,7 @@ function getHost(url) {
 		return null;
 	}
 	
+	document.getElementById("host").innerHTML = "host: " + host
 	return host
 }
 
@@ -187,6 +188,7 @@ function getPort(url) {
 		port = '80';
 	} 
 
+	document.getElementById("port").innerHTML = "port: " + port
 	return port
 }
 
@@ -200,15 +202,16 @@ function getPath(url) {
 		return '/'
 	} else if ((path === '/') && isNotAfterSlash('?', url)) {
 		return ''
-	} else if ((path === '/') && isNotAfterSlash('#', url) {
+	} else if ((path === '/') && isNotAfterSlash('#', url)) {
 		return ''
 	} else if (path.match(/%[0-9a-f]{2}/i)) {
     	path = decodeURIComponent(path)
 	}
 
-	
+	document.getElementById("path").innerHTML = "path: " + path
 	return path
 }
+
 function isNotAfterSlash(char, url) {
 	return url.charAt(url.indexOf(char)-1) !== '/';
 }
@@ -221,26 +224,14 @@ function getQuery(url) {
 	if (qstr == '') {
 		return null;
 	}
-<<<<<<< HEAD
-	query = {};
-    	a = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
-    	for (i = 0; i < a.length; i++) {
-        	b = a[i].split('=');
-        	query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
-    	}
-
-	document.getElementById("query").innerHTML = "query: " + query
-    	return query;
-=======
 	var query = {};
     var a = (qstr[0] === '?' ? qstr.substr(1) : qstr).split('&');
     for (var i = 0; i < a.length; i++) {
         var b = a[i].split('=');
         query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
     }
-
+	document.getElementById("query").innerHTML = "query: " + query
     return query;
->>>>>>> d6f695ab3a4c4ae499da1b5802a53f9c71b1ba67
 }
 
 function getFragment(url) {
@@ -258,5 +249,6 @@ function getFragment(url) {
     	fragment = decodeURIComponent(fragment)
 	}
 	
+	document.getElementById("fragment").innerHTML = "fragment: " + fragment
 	return fragment
 }
