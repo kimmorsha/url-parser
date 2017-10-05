@@ -141,12 +141,12 @@ function getPath(url) {
 function getQuery(url) {
 	parser.href = url;
 
-	var qstr = parser.search
-	if (qstr == '') {
+	var queryString = parser.search
+	if (queryString == '') {
 		return null;
 	}
 	var query = {};
-    var a = (qstr[0] === '?' ? qstr.substr(1) : qstr).split('&');
+    var a = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
     for (var i = 0; i < a.length; i++) {
         var b = a[i].split('=');
         query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
