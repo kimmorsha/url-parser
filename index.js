@@ -13,8 +13,7 @@ var _host;
 var _port;
 var _path;
 var _query;
-var _fragment
-var parser = document.createElement('a');
+var _fragment;
 
 function parse(url) {
 
@@ -48,6 +47,7 @@ function parse(url) {
 }
 
 function getScheme(url) {
+	var parser = document.createElement('a');
 	parser.href = url;
 
 	var scheme = parser.protocol
@@ -58,6 +58,7 @@ function getScheme(url) {
 }
 
 function getUsername(url) {
+	var parser = document.createElement('a');
 	parser.href = url;
 
 	var username = parser.username
@@ -75,6 +76,7 @@ function getUsername(url) {
 }
 
 function getPassword(url) {
+	var parser = document.createElement('a');
 	parser.href = url;
 
 	var password = parser.password
@@ -89,6 +91,7 @@ function getPassword(url) {
 }
 
 function getHost(url) {
+	var parser = document.createElement('a');
 	parser.href = url;
 
 	var host = parser.hostname
@@ -100,73 +103,66 @@ function getHost(url) {
 }
 
 function getPort(url) {
+	var parser = document.createElement('a');
 	parser.href = url;
-
-	const HTTPS_SCHEME = 'https';
- 	const SSH_SCHEME = 'ssh';
- 	const FTP_SCHEME = 'ftp';
- 	const HTTP_HOST = 'http';
- 
- 	const HTTPS_PORT = '443';
- 	const SSH_PORT = '22';
- 	const FTP_PORT = '21';
- 	const HTTP_PORT = '80';
- 
- 	const EMPTY = ''; 
 
 	var port = parser.port
 	
-	if (_scheme === HTTPS_SCHEME && port === EMPTY) {
- 		port = HTTPS_PORT;
- 	} else if (_scheme === SSH_SCHEME && port === EMPTY) {
- 		port = SSH_PORT;
- 	} else if (_scheme === FTP_SCHEME && port === EMPTY) {
- 		port = FTP_PORT;
- 	} else if (_host === null && port === EMPTY) {
- 		port = null;
- 	} else if (_host !== HTTP_HOST && port === EMPTY) {
- 		port = HTTP_PORT;
-  	} 
+	if (_scheme === 'https' && port === '') {
+		port = '443';
+	} else if (_scheme === 'ssh' && port === '') {
+		port = '22';
+	} else if (_scheme === 'ftp' && port === '') {
+		port = '21';
+	} else if (_host === null && port === '') {
+		port = null;
+	} else if (_host !== 'http' && port === '') {
+		port = '80';
+	} 
+
 	return port
 }
 
 function getPath(url) {
+	var parser = document.createElement('a');
 	parser.href = url;
 
 	var path = parser.pathname
 
 	if ((path === '/') && (url.charAt(url.length-1) === '/')) {
 		return '/'
-	} else if ((path === '/') && isNotAfterSlash('?', url)) {
-  		return ''
-	} else if ((path === '/') && isNotAfterSlash('#', url)) {
-  		return ''
-  	} else if (path.match(/%[0-9a-f]{2}/i)) {
+	} else if ((path === '/') && (url.charAt(url.indexOf('?')-1) !== '/')) {
+		return ''
+	} else if ((path === '/') && (url.charAt(url.indexOf('#')-1) !== '/')) {
+		return ''
+	} else if (path.match(/%[0-9a-f]{2}/i)) {
     	path = decodeURIComponent(path)
 	}
 
+	
 	return path
 }
 
 function getQuery(url) {
+	var parser = document.createElement('a');
 	parser.href = url;
 
-	var queryString = parser.search
-	if (queryString == '') {
+	var qstr = parser.search
+	if (qstr == '') {
 		return null;
 	}
 	var query = {};
-    var a = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
-	
-	for (i = 0; i < a.length; i++) {
-    	b = a[i].split('=');
-    	query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
-   	}
+    var a = (qstr[0] === '?' ? qstr.substr(1) : qstr).split('&');
+    for (var i = 0; i < a.length; i++) {
+        var b = a[i].split('=');
+        query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+    }
 
     return query;
 }
 
 function getFragment(url) {
+	var parser = document.createElement('a');
 	parser.href = url;
 
 	var fragment = parser.hash;
@@ -181,8 +177,4 @@ function getFragment(url) {
 	}
 	
 	return fragment
-}
-
-function isNotAfterSlash(char, url) {
-	return url.charAt(url.indexOf(char)-1) !== '/';
 }
