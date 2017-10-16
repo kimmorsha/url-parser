@@ -1,32 +1,36 @@
 var ol = $('ol');
 
+// Chat messages should be follow the set chat message template
+// (see index.html:15)
 function addMessage(urlString) {
-    // Chat messages should be follow the set chat message template
-    // (see index.html:15)
     	ol.empty();
     	ol.append('<li>' + urlString + '</li>');
 }
 
+// This function sends a message to server via AJAX. See code at the bottom
+// of this file for explanation on the different parts of this AJAX request.
+// This sends a POST request to the server, and since we're not interested
+// on the server's response, we didn't have to listen for the "readystatechange"
+// event anymore.
 function sendMessage(urlString) {
-    // This function sends a message to server via AJAX. See code at the bottom
-    // of this file for explanation on the different parts of this AJAX request.
-    // This sends a POST request to the server, and since we're not interested
-    // on the server's response, we didn't have to listen for the "readystatechange"
-    // event anymore.
+    
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'http://localhost:3000/url');
 	xhr.send(urlString);
 }
 
+//this function adds the result message
 function addResult(resultMessage){
-	//this function adds the result message
+	
 	p.empty();
 	p.append('<li>' + resultMessage + '</li>');
 }
+
+ // This function fetches the messages from the server via AJAX. See code at
+ // the bottom of this file for explanation on the different parts of this
+ // AJAX request.
 function fetchMessages() {
-    // This function fetches the messages from the server via AJAX. See code at
-    // the bottom of this file for explanation on the different parts of this
-    // AJAX request.
+   
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === xhr.DONE) {
@@ -63,13 +67,10 @@ $('form').on('submit', function(e) {
 		input.val('');
 	}
 });
-/**
- *  Parses the given URL into its different components.
- *
- *  TODO: Implement this function.
- *  NOTE: You may implement additional functions as you need, as long as this
- *    function behaves as specified in the instructions. Have fun! :)
- **/
+//*********************************************************
+// Parses the given URL into its different components.
+//
+//*********************************************************
 
 var _scheme;
 var _username;
@@ -82,7 +83,6 @@ var _fragment;
 	
 
 function parse(url) {
-
 	_scheme = getScheme(url);
 	_username = getUsername(url);
 	_password = getPassword(url);
@@ -111,6 +111,7 @@ function parse(url) {
 	return obj;
 }
 
+
 function getScheme(url) {
 	parser = helpParser();
 	parser.href = url;
@@ -123,6 +124,7 @@ function getScheme(url) {
 	document.getElementById("scheme").innerHTML = "scheme: " + scheme
 	return scheme;
 }
+
 
 function getUsername(url) {
 	parser = helpParser();
@@ -144,6 +146,7 @@ function getUsername(url) {
 	return username
 }
 
+
 function getPassword(url) {
 	parser = helpParser();
 	parser.href = url;
@@ -160,6 +163,7 @@ function getPassword(url) {
 	return password
 }
 
+
 function getHost(url) {
 	parser = helpParser();
 	parser.href = url;
@@ -172,6 +176,7 @@ function getHost(url) {
 	document.getElementById("host").innerHTML = "host: " + host
 	return host
 }
+
 
 function getPort(url) {
 	parser = helpParser();
@@ -207,6 +212,7 @@ function getPort(url) {
 	return port
 }
 
+
 function getPath(url) {
 	parser = helpParser();
 	parser.href = url;
@@ -227,9 +233,12 @@ function getPath(url) {
 	document.getElementById("path").innerHTML = "path: " + path
 	return path
 }
+
+
 function isNotAfterSlash(char, url) {
 	return url.charAt(url.indexOf(char)-1) !== '/';
 }
+
 
 function getQuery(url) {
 	parser = helpParser();
@@ -250,6 +259,7 @@ function getQuery(url) {
     	return query;
 }
 
+
 function getFragment(url) {
 	parser = helpParser();
 	parser.href = url;
@@ -268,6 +278,7 @@ function getFragment(url) {
 	document.getElementById("fragment").innerHTML = "fragment: " + fragment
 	return fragment
 }
+
 
 function helpParser() {
 	return document.createElement('a');
