@@ -95,16 +95,13 @@ function parse(url) {
 
 	obj = {
 	    scheme: _scheme,
-
 	    authority: {
-	      username: _username,
-	      password: _password,
-	      host: _host,
-	      port: _port
+	    	username: _username,
+	    	password: _password,
+	    	host: _host,
+	    	port: _port
 	    },
-
 	    path: _path,
-
 	    query: _query,
 	    fragment: _fragment	  
 	};
@@ -121,7 +118,6 @@ function getScheme(url) {
 	scheme =  scheme.split(":")
 	scheme =  scheme[0]
 	
-
 	document.getElementById("scheme").innerHTML = "scheme: " + scheme
 	return scheme;
 }
@@ -137,12 +133,10 @@ function getUsername(url) {
 	}
 	username = username.split(":")
 	username = username[0]
-
 	if (username.match(/%[0-9a-f]{2}/i)) {
-    		username = decodeURIComponent(username)
+    	username = decodeURIComponent(username)
 	}
 	
-
 	document.getElementById("username").innerHTML = "username: " + username
 	return username
 }
@@ -219,7 +213,6 @@ function getPath(url) {
 	parser.href = url;
 
 	path = parser.pathname
-
 	if ((path === '/') && (url.charAt(url.length-1) === '/')) {
 		return '/'
 	} else if ((path === '/') && isNotAfterSlash('?', url)) {
@@ -230,7 +223,6 @@ function getPath(url) {
     	path = decodeURIComponent(path)
 	}
 
-	
 	document.getElementById("path").innerHTML = "path: " + path
 	return path
 }
