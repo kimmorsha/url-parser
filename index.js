@@ -2,7 +2,7 @@ var ol = $('ol');
 
 // Chat messages should be follow the set chat message template
 // (see index.html:15)
-function addMessage(urlString) {
+function addMessage( urlString ) {
 	ol.empty();
 	ol.append('<li>' + urlString + '</li>');
 }
@@ -13,15 +13,15 @@ function addMessage(urlString) {
 // This sends a POST request to the server, and since we're not interested
 // on the server's response, we didn't have to listen for the "readystatechange"
 // event anymore.
-function sendMessage(urlString) {
+function sendMessage( urlString ) {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'http://localhost:3000/url');
-	xhr.send(urlString);
+	xhr.send( urlString );
 }
 
 
 //this function adds the result message
-function addResult(resultMessage){
+function addResult( resultMessage ){
 	p.empty();
 	p.append('<li>' + resultMessage + '</li>');
 }
@@ -33,13 +33,13 @@ function addResult(resultMessage){
 function fetchMessages() {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
-		if (xhr.readyState === xhr.DONE) {
-			var messages = JSON.parse(xhr.responseText);
+		if ( xhr.readyState === xhr.DONE ) {
+			var messages = JSON.parse( xhr.responseText );
 			ol.empty();
-			messages.forEach(addMessage);
+			messages.forEach( addMessage );
 		}
 	};
-	xhr.open('GET', 'http://localhost:3000/url');
+	xhr.open( 'GET', 'http://localhost:3000/url' );
 	xhr.send();
 }
 
@@ -50,7 +50,7 @@ function fetchMessages() {
 // for more info about setInterval). This technique of repeatedly sending AJAX
 // requests to the server to retrieve data or check if there's is new data is
 // called "polling".
-setInterval(fetchMessages, 100);
+setInterval( fetchMessages, 100 );
 
 $('button[type]').on('click', function(e) {
 	addMessage(e.target.textContent);
@@ -83,15 +83,15 @@ var _query;
 var _fragment;
 	
 
-function parse(url) {
-	_scheme = getScheme(url);
-	_username = getUsername(url);
-	_password = getPassword(url);
-	_host  = getHost(url);
-	_port = getPort(url);
-	_path = getPath(url);
-	_query = getQuery(url);
-	_fragment = getFragment(url);
+function parse( url ) {
+	_scheme = getScheme( url );
+	_username = getUsername( url );
+	_password = getPassword( url );
+	_host  = getHost( url );
+	_port = getPort( url );
+	_path = getPath( url );
+	_query = getQuery( url );
+	_fragment = getFragment( url );
 
 	obj = {
 	    scheme: _scheme,
@@ -110,7 +110,7 @@ function parse(url) {
 }
 
 
-function getScheme(url) {
+function getScheme( url ) {
 	parser = helpParser();
 	parser.href = url;
 
@@ -123,17 +123,17 @@ function getScheme(url) {
 }
 
 
-function getUsername(url) {
+function getUsername( url ) {
 	parser = helpParser();
 	parser.href = url;
 
 	username = parser.username
-	if (username == '') {
+	if ( username == '' ) {
 		return null;
 	}
 	username = username.split(":")
-	username = username[0]
-	if (username.match(/%[0-9a-f]{2}/i)) {
+	username = username[ 0 ]
+	if ( username.match(/%[0-9a-f]{2}/i) ) {
     	username = decodeURIComponent(username)
 	}
 	
@@ -142,15 +142,15 @@ function getUsername(url) {
 }
 
 
-function getPassword(url) {
+function getPassword( url ) {
 	parser = helpParser();
 	parser.href = url;
 
 	password = parser.password
-	if (password == '') {
+	if ( password == '' ) {
 		return null;
 	}
-	if (password.match(/%[0-9a-f]{2}/i)) {
+	if ( password.match(/%[0-9a-f]{2}/i) ) {
     	password = decodeURIComponent(password)
 	}
 	
@@ -159,12 +159,12 @@ function getPassword(url) {
 }
 
 
-function getHost(url) {
+function getHost( url ) {
 	parser = helpParser();
 	parser.href = url;
 
 	host = parser.hostname
-	if (host == '') {
+	if ( host == '' ) {
 		return null;
 	}
 	
@@ -173,7 +173,7 @@ function getHost(url) {
 }
 
 
-function getPort(url) {
+function getPort( url ) {
 	parser = helpParser();
 	parser.href = url;
 
@@ -191,15 +191,15 @@ function getPort(url) {
 
 	port = parser.port
 	
-	if (_scheme === HTTPS_SCHEME && port === EMPTY) {
+	if ( _scheme === HTTPS_SCHEME && port === EMPTY ) {
 		port = HTTPS_PORT;
-	} else if (_scheme === SSH_SCHEME && port === EMPTY) {
+	} else if ( _scheme === SSH_SCHEME && port === EMPTY ) {
 		port = SSH_PORT;
-	} else if (_scheme === FTP_SCHEME && port === EMPTY) {
+	} else if ( _scheme === FTP_SCHEME && port === EMPTY ) {
 		port = FTP_PORT;
-	} else if (_host === null && port === EMPTY) {
+	} else if ( _host === null && port === EMPTY ) {
 		port = null;
-	} else if (_host !== HTTP_HOST && port === EMPTY) {
+	} else if ( _host !== HTTP_HOST && port === EMPTY ) {
 		port = HTTP_PORT;
 	} 
 
@@ -208,16 +208,16 @@ function getPort(url) {
 }
 
 
-function getPath(url) {
+function getPath( url ) {
 	parser = helpParser();
 	parser.href = url;
 
 	path = parser.pathname
-	if ((path === '/') && (url.charAt(url.length-1) === '/')) {
+	if ( ( path === '/' ) && ( url.charAt( url.length-1 ) === '/') ) {
 		return '/'
-	} else if ((path === '/') && isNotAfterSlash('?', url)) {
+	} else if ( ( path === '/' ) && isNotAfterSlash( '?', url ) ) {
 		return ''
-	} else if ((path === '/') && isNotAfterSlash('#', url) {
+	} else if ( ( path === '/' ) && isNotAfterSlash( '#', url ) ) {
 		return ''
 	} else if (path.match(/%[0-9a-f]{2}/i)) {
     	path = decodeURIComponent(path)
@@ -228,24 +228,24 @@ function getPath(url) {
 }
 
 
-function isNotAfterSlash(char, url) {
-	return url.charAt(url.indexOf(char)-1) !== '/';
+function isNotAfterSlash( char, url ) {
+	return url.charAt( url.indexOf( char ) - 1 ) !== '/';
 }
 
 
-function getQuery(url) {
+function getQuery( url ) {
 	parser = helpParser();
 	parser.href = url;
 
 	queryString = parser.search
-	if (queryString == '') {
+	if ( queryString == '' ) {
 		return null;
 	}
 	query = {};
-    a = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
-    for (i = 0; i < a.length; i++) {
-        b = a[i].split('=');
-        query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+    a = (queryString[ 0 ] === '?' ? queryString.substr( 1 ) : queryString).split( '&' );
+    for ( i = 0; i < a.length; i++ ) {
+        b = a[ i ].split( '=' );
+        query[ decodeURIComponent( b[ 0 ] ) ] = decodeURIComponent( b[ 1 ] || '' );
     }
 
 	document.getElementById("query").innerHTML = "query: " + query
@@ -253,18 +253,18 @@ function getQuery(url) {
 }
 
 
-function getFragment(url) {
+function getFragment( url ) {
 	parser = helpParser();
 	parser.href = url;
 
 	fragment = parser.hash;
-	if (fragment == '') {
+	if ( fragment == '' ) {
 		return null;
 	}
 	fragment = fragment.split("#")
-	fragment = fragment[1]
+	fragment = fragment[ 1 ]
 
-	if (fragment.match(/%[0-9a-f]{2}/i)) {
+	if ( fragment.match(/%[0-9a-f]{2}/i) ) {
     	fragment = decodeURIComponent(fragment)
 	}
 	
