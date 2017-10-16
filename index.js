@@ -15,7 +15,7 @@ function addMessage( urlString ) {
 // event anymore.
 function sendMessage( urlString ) {
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'http://localhost:3000/url');
+	xhr.open( 'POST', 'http://localhost:3000/url' );
 	xhr.send( urlString );
 }
 
@@ -23,7 +23,7 @@ function sendMessage( urlString ) {
 //this function adds the result message
 function addResult( resultMessage ){
 	p.empty();
-	p.append('<li>' + resultMessage + '</li>');
+	p.append( '<li>' + resultMessage + '</li>' );
 }
 
 
@@ -53,18 +53,18 @@ function fetchMessages() {
 setInterval( fetchMessages, 100 );
 
 $('button[type]').on('click', function(e) {
-	addMessage(e.target.textContent);
-	sendMessage(e.target.textContent);
+	addMessage( e.target.textContent );
+	sendMessage( e.target.textContent );
 });
 
 var input = $('input');
 
 $('form').on('submit', function(e) {
 	e.preventDefault();
-	if (input.val()) {
-		addMessage(input.val());
-		sendMessage(input.val());
-		parse(input.val());
+	if ( input.val() ) {
+		addMessage( input.val() );
+		sendMessage( input.val() );
+		parse( input.val() );
 		input.val('');
 	}
 });
