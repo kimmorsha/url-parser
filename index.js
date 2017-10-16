@@ -3,9 +3,10 @@ var ol = $('ol');
 // Chat messages should be follow the set chat message template
 // (see index.html:15)
 function addMessage(urlString) {
-    	ol.empty();
-    	ol.append('<li>' + urlString + '</li>');
+	ol.empty();
+	ol.append('<li>' + urlString + '</li>');
 }
+
 
 // This function sends a message to server via AJAX. See code at the bottom
 // of this file for explanation on the different parts of this AJAX request.
@@ -13,24 +14,23 @@ function addMessage(urlString) {
 // on the server's response, we didn't have to listen for the "readystatechange"
 // event anymore.
 function sendMessage(urlString) {
-    
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'http://localhost:3000/url');
 	xhr.send(urlString);
 }
 
+
 //this function adds the result message
 function addResult(resultMessage){
-	
 	p.empty();
 	p.append('<li>' + resultMessage + '</li>');
 }
+
 
  // This function fetches the messages from the server via AJAX. See code at
  // the bottom of this file for explanation on the different parts of this
  // AJAX request.
 function fetchMessages() {
-   
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === xhr.DONE) {
@@ -42,6 +42,7 @@ function fetchMessages() {
 	xhr.open('GET', 'http://localhost:3000/url');
 	xhr.send();
 }
+
 
 // In order to fetch messages from the server, we need to call the "fetchMessages"
 // function. With the code below, we are using "setInterval" to repeatedly call
@@ -249,14 +250,14 @@ function getQuery(url) {
 		return null;
 	}
 	query = {};
-    	a = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
-    	for (i = 0; i < a.length; i++) {
-        	b = a[i].split('=');
-        	query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
-    	}
+    a = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+    for (i = 0; i < a.length; i++) {
+        b = a[i].split('=');
+        query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+    }
 
 	document.getElementById("query").innerHTML = "query: " + query
-    	return query;
+    return query;
 }
 
 
