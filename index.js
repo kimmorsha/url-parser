@@ -117,11 +117,11 @@ function parse( url ) {
 function getScheme( url ) {
 	parser.href = url;
 
-	var scheme = parser.protocol
+	scheme = parser.protocol
 	scheme =  scheme.split(":")
 	scheme =  scheme[0]
 	
-	document.getElementById("scheme").innerHTML = "scheme: " + scheme
+	//document.getElementById("scheme").innerHTML = "scheme: " + scheme
 	return scheme;
 }
 
@@ -139,7 +139,7 @@ function getUsername( url ) {
     	username = decodeURIComponent(username)
 	}
 	
-	document.getElementById("username").innerHTML = "username: " + username
+	//document.getElementById("username").innerHTML = "username: " + username
 	return username
 }
 
@@ -166,13 +166,14 @@ function getHost( url ) {
 	if ( host == '' ) {
 		return null;
 	}
-	
+
 	return host
 }
 
 
 function getPort( url ) {
 	parser.href = url;
+	_host  = getHost( url );
 
 	const HTTPS_SCHEME = 'https';
 	const SSH_SCHEME = 'ssh';
@@ -205,7 +206,7 @@ function getPort( url ) {
 
 
 function getPath( url ) {
-	parser = helpParser();
+	//parser = helpParser();
 	parser.href = url;
 
 	path = parser.pathname
@@ -219,7 +220,7 @@ function getPath( url ) {
     	path = decodeURIComponent(path)
 	}
 
-	document.getElementById("path").innerHTML = "path: " + path
+	//document.getElementById("path").innerHTML = "path: " + path
 	return path
 }
 
@@ -230,7 +231,7 @@ function isNotAfterSlash( char, url ) {
 
 
 function getQuery( url ) {
-	parser = helpParser();
+	//parser = helpParser();
 	parser.href = url;
 
 	queryString = parser.search
@@ -244,13 +245,13 @@ function getQuery( url ) {
         query[ decodeURIComponent( b[ 0 ] ) ] = decodeURIComponent( b[ 1 ] || '' );
     }
 
-	document.getElementById("query").innerHTML = "query: " + query
+	//document.getElementById("query").innerHTML = "query: " + query
     return query;
 }
 
 
 function getFragment( url ) {
-	parser = helpParser();
+	//parser = helpParser();
 	parser.href = url;
 
 	fragment = parser.hash;
