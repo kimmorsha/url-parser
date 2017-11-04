@@ -1,74 +1,51 @@
 var ol = $('ol');
 
-// Chat messages should be follow the set chat message template
-// (see index.html:15)
+
 function addMessage( urlString ) {
+	console.log("addMessage" + urlString)
 	ol.empty();
 	ol.append('<li>' + urlString + '</li>');
 }
 
 
-// This function sends a message to server via AJAX. See code at the bottom
-// of this file for explanation on the different parts of this AJAX request.
-// This sends a POST request to the server, and since we're not interested
-// on the server's response, we didn't have to listen for the "readystatechange"
-// event anymore.
-function sendMessage( urlString ) {
-	var xhr = new XMLHttpRequest();
-	xhr.open( 'POST', 'http://localhost:3000/url' );
-	xhr.send( urlString );
-}
-
-
-//this function adds the result message
-function addResult( resultMessage ){
-	p.empty();
-	p.append( '<li>' + resultMessage + '</li>' );
-}
-
-
- // This function fetches the messages from the server via AJAX. See code at
- // the bottom of this file for explanation on the different parts of this
- // AJAX request.
-function fetchMessages() {
-	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		if ( xhr.readyState === xhr.DONE ) {
-			var messages = JSON.parse( xhr.responseText );
-			ol.empty();
-			messages.forEach( addMessage );
-		}
-	};
-	xhr.open( 'GET', 'http://localhost:3000/url' );
-	xhr.send();
-}
-
-
-// In order to fetch messages from the server, we need to call the "fetchMessages"
-// function. With the code below, we are using "setInterval" to repeatedly call
-// "fetchMessages". (See https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval
-// for more info about setInterval). This technique of repeatedly sending AJAX
-// requests to the server to retrieve data or check if there's is new data is
-// called "polling".
-setInterval( fetchMessages, 100 );
-
 $('button[type]').on('click', function(e) {
+
 	addMessage( e.target.textContent );
 	sendMessage( e.target.textContent );
 });
 
+
 var input = $('input');
+
 
 $('form').on('submit', function(e) {
 	e.preventDefault();
 	if ( input.val() ) {
 		addMessage( input.val() );
-		sendMessage( input.val() );
-		parse( input.val() );
+		var parsedUrl = parse( input.val() );
+		document.getElementById("scheme").innerHTML = "scheme: " + parsedUrl.scheme
+		document.getElementById("username").innerHTML = "username: " + parsedUrl.authority.username
+		document.getElementById("password").innerHTML = "password: " + parsedUrl.authority.password
+		document.getElementById("host").innerHTML = "host: " + parsedUrl.authority.host
+		document.getElementById("port").innerHTML = "port: " + parsedUrl.authority.port
+		document.getElementById("path").innerHTML = "path: " + parsedUrl.path
+		document.getElementById("query").innerHTML = "query:" + iterateQuery(parsedUrl.query);
+		document.getElementById("fragment").innerHTML = "fragment: " + parsedUrl.fragment
+
 		input.val('');
+
 	}
 });
 
+
+function iterateQuery( query ) {
+	var queryHtml = "<br>"
+
+	$.each( query, function( k , v ) {
+    queryHtml += k + " : " + v + "<br>";
+  	});
+	return queryHtml;
+}
 
 //*********************************************************
 // Parses the given URL into its different components.
@@ -87,7 +64,10 @@ var _fragment
 var parser = document.createElement('a');
 
 
+
 function parse( url ) {
+	parser = document.createElement('a');
+
 	_scheme = getScheme( url );
 	_username = getUsername( url );
 	_password = getPassword( url );
@@ -121,7 +101,7 @@ function getScheme( url ) {
 	scheme =  scheme.split(":")
 	scheme =  scheme[0]
 	
-	document.getElementById("scheme").innerHTML = "scheme: " + scheme
+	
 	return scheme;
 }
 
@@ -139,7 +119,6 @@ function getUsername( url ) {
     	username = decodeURIComponent(username)
 	}
 	
-	document.getElementById("username").innerHTML = "username: " + username
 	return username
 }
 
@@ -162,12 +141,10 @@ function getPassword( url ) {
 function getHost( url ) {
 	parser.href = url;
 
-	host = parser.hostname
+	var host = parser.hostname
 	if ( host == '' ) {
 		return null;
 	}
-
-	document.getElementById("host").innerHTML = "host: " + host
 	return host
 }
 
@@ -201,13 +178,12 @@ function getPort( url ) {
 	} else if ( _host !== HTTP_HOST && port === EMPTY ) {
 		port = HTTP_PORT;
 	} 
-	document.getElementById("port").innerHTML = "port: " + port
+	
 	return port
 }
 
 
 function getPath( url ) {
-	//parser = helpParser();
 	parser.href = url;
 
 	path = parser.pathname
@@ -221,7 +197,6 @@ function getPath( url ) {
     	path = decodeURIComponent(path)
 	}
 
-	document.getElementById("path").innerHTML = "path: " + path
 	return path
 }
 
@@ -232,7 +207,6 @@ function isNotAfterSlash( char, url ) {
 
 
 function getQuery( url ) {
-	//parser = helpParser();
 	parser.href = url;
 
 	queryString = parser.search
@@ -246,13 +220,12 @@ function getQuery( url ) {
         query[ decodeURIComponent( b[ 0 ] ) ] = decodeURIComponent( b[ 1 ] || '' );
     }
 
-	document.getElementById("query").innerHTML = "query: " + query
+	
     return query;
 }
 
 
 function getFragment( url ) {
-	//parser = helpParser();
 	parser.href = url;
 
 	fragment = parser.hash;
@@ -266,7 +239,6 @@ function getFragment( url ) {
     	fragment = decodeURIComponent(fragment)
 	}
 
-	document.getElementById("fragment").innerHTML = "fragment: " + fragment
 	return fragment
 }
 
