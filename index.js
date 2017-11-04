@@ -50,7 +50,7 @@ function fetchMessages() {
 // for more info about setInterval). This technique of repeatedly sending AJAX
 // requests to the server to retrieve data or check if there's is new data is
 // called "polling".
-setInterval( fetchMessages, 100 );
+//setInterval( fetchMessages, 100 );
 
 $('button[type]').on('click', function(e) {
 	addMessage( e.target.textContent );
@@ -68,10 +68,13 @@ $('form').on('submit', function(e) {
 		input.val('');
 	}
 });
+
+
 //*********************************************************
 // Parses the given URL into its different components.
 //
 //*********************************************************
+
 
 var _scheme;
 var _username;
@@ -80,8 +83,9 @@ var _host;
 var _port;
 var _path;
 var _query;
-var _fragment;
-	
+var _fragment
+var parser = document.createElement('a');
+
 
 function parse( url ) {
 	_scheme = getScheme( url );
@@ -111,10 +115,9 @@ function parse( url ) {
 
 
 function getScheme( url ) {
-	parser = helpParser();
 	parser.href = url;
 
-	scheme = parser.protocol
+	var scheme = parser.protocol
 	scheme =  scheme.split(":")
 	scheme =  scheme[0]
 	
@@ -124,7 +127,6 @@ function getScheme( url ) {
 
 
 function getUsername( url ) {
-	parser = helpParser();
 	parser.href = url;
 
 	username = parser.username
@@ -143,7 +145,6 @@ function getUsername( url ) {
 
 
 function getPassword( url ) {
-	parser = helpParser();
 	parser.href = url;
 
 	password = parser.password
@@ -154,13 +155,11 @@ function getPassword( url ) {
     	password = decodeURIComponent(password)
 	}
 	
-	document.getElementById("password").innerHTML = "password: " + password
 	return password
 }
 
 
 function getHost( url ) {
-	parser = helpParser();
 	parser.href = url;
 
 	host = parser.hostname
@@ -168,13 +167,11 @@ function getHost( url ) {
 		return null;
 	}
 	
-	document.getElementById("host").innerHTML = "host: " + host
 	return host
 }
 
 
 function getPort( url ) {
-	parser = helpParser();
 	parser.href = url;
 
 	const HTTPS_SCHEME = 'https';
@@ -184,12 +181,12 @@ function getPort( url ) {
 
 	const HTTPS_PORT = '443';
 	const SSH_PORT = '22';
-	const FTP_PORT = '21';
+	const FTP_PORT = '21'
 	const HTTP_PORT = '80';
 
-	const EMPTY = ''; 
+	const EMPTY = '';
 
-	port = parser.port
+	var port = parser.port
 	
 	if ( _scheme === HTTPS_SCHEME && port === EMPTY ) {
 		port = HTTPS_PORT;
@@ -203,7 +200,6 @@ function getPort( url ) {
 		port = HTTP_PORT;
 	} 
 
-	document.getElementById("port").innerHTML = "port: " + port
 	return port
 }
 
@@ -268,11 +264,6 @@ function getFragment( url ) {
     	fragment = decodeURIComponent(fragment)
 	}
 	
-	document.getElementById("fragment").innerHTML = "fragment: " + fragment
 	return fragment
 }
 
-
-function helpParser() {
-	return document.createElement('a');
-}

@@ -4,33 +4,19 @@
     <meta charset="utf-8">
     <title>Lab Exercise: URL Parser</title>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="lib/mocha/mocha.css">
   </head>
 
   <body>
+    <div id="mocha"></div>
 
-  <section>
-    <ol>
-    </ol>
+    <script src="lib/mocha/mocha.js"></script>
+    <script src="lib/chai/chai.js"></script>
+    <script src="lib/js/jquery-3.2.1.min.js"></script>
 
-    <form action="#" method="post">
-      <input type="text" name="message" placeholder="Enter URL" autofocus>
-      <button>Send</button>
-    </form>
-    
-    <p id="scheme"></p>
-    <p id="username"></p>
-    <p id="password"></p>
-    <p id="host"></p>
-    <p id="port"></p>
-    <p id="path"></p>
-    <p id="query"></p>
-    <p id="fragment"></p>
-    
-  </section>
-
-    <script src="jquery.js"></script>
-    <script src="scripts.js"></script>
+    <script>mocha.setup('bdd');</script>
     <script src="index.js"></script>
+    <script src="tests.js"></script>
+    <script>mocha.run();</script>
   </body>
 </html>
