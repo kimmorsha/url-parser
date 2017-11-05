@@ -156,7 +156,7 @@ function getPort( url ) {
 	const HTTPS_SCHEME = 'https';
 	const SSH_SCHEME = 'ssh';
 	const FTP_SCHEME = 'ftp';
-	const HTTP_HOST = 'http';
+	const HTTPS_PORT_HOST = 'http';
 
 	const HTTPS_PORT = '443';
 	const SSH_PORT = '22';
@@ -212,15 +212,18 @@ function isNotAfterSlash( char, url ) {
 function getQuery( url ) {
 	parser.href = url;
 
-	queryString = parser.search
+	var queryString = parser.search
+
 	if ( queryString == '' ) {
 		return null;
 	}
-	query = {};
-    a = (queryString[ 0 ] === '?' ? queryString.substr( 1 ) : queryString).split( '&' );
-    for ( i = 0; i < a.length; i++ ) {
-        b = a[ i ].split( '=' );
-        query[ decodeURIComponent( b[ 0 ] ) ] = decodeURIComponent( b[ 1 ] || '' );
+
+	var queryArray = {};
+    var query = (queryString[ 0 ] === '?' ? queryString.substr( 1 ) : queryString).split( '&' );
+    
+    for ( var indexOfQuery = 0; indexOfQuery < query.length; indexOfQueryy++ ) {
+        var queryPart = query[indexOfa].split('=');
+        queryArray[decodeURIComponent(queryPart[0])] = decodeURIComponent(queryPart[1] || '');
     }
 
 	
