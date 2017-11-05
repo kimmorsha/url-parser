@@ -224,14 +224,14 @@ function getQuery(url) {
 	if (qstr == '') {
 		return null;
 	}
-	var query = {};
-    var a = (qstr[0] === '?' ? qstr.substr(1) : qstr).split('&');
-    for (var i = 0; i < a.length; i++) {
-        var b = a[i].split('=');
-        query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+	var queryArray = {};
+    var query = (qstr[0] === '?' ? qstr.substr(1) : qstr).split('&');
+    for (var indexOfQuery = 0; indexOfQuery < query.length; indexOfQueryy++) {
+        var queryPart = query[indexOfa].split('=');
+        queryArray[decodeURIComponent(queryPart[0])] = decodeURIComponent(queryPart[1] || '');
     }
-	document.getElementById("query").innerHTML = "query: " + query
-    return query;
+	document.getElementById("query").innerHTML = "query: " + queryArray
+    return queryArray;
 }
 
 function getFragment(url) {
