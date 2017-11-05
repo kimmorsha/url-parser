@@ -1,51 +1,8 @@
 @charset "utf-8";
-/*body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  font-family: sans-serif;
-  color: #333;
-  background-color: #eee;
+
+body {
+  margin:0;
 }
-input,
-button {
-  font: inherit;
-  color: inherit;
-}
-section {
-  width: 400px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  border-radius: 3px;
-}
-ol {
-  height: 50px;
-  margin: 0;
-  padding: 20px;
-  list-style: none;
-  overflow: auto;
-}
-li {
-  padding: 0.5em 1em;
-  background-color: #eee;
-  border-radius: 3px;
-}
-li:not(:first-child) {
-  margin-top: 5px;
-}
-li:not(:last-child) {
-  margin-bottom: 5px;
-}
-form {
-  display: flex;
-  border-top: 1px solid #ddd;
-}
-input {
-  flex-grow: 1;
-  padding: 0.5em;
-}*/
 
 #mocha {
   font: 20px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
