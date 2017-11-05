@@ -187,7 +187,7 @@ function getPath( url ) {
 	parser.href = url;
 
 	path = parser.pathname
-	if ( ( path === '/' ) && ( url.charAt( url.length-1 ) === '/') ) {
+	if ( ( path === '/' ) && isPathOnlyASlash( url ) ) {
 		return '/'
 	} else if ( ( path === '/' ) && isNotAfterSlash( '?', url ) ) {
 		return ''
@@ -200,6 +200,9 @@ function getPath( url ) {
 	return path
 }
 
+function isPathOnlyASlash( url ) {
+	return url.charAt( url.length-1 ) === '/';
+}
 
 function isNotAfterSlash( char, url ) {
 	return url.charAt( url.indexOf( char ) - 1 ) !== '/';
