@@ -221,6 +221,7 @@ function getQuery( url ) {
 	var queryArray = {};
     var query = (queryString[ 0 ] === '?' ? queryString.substr( 1 ) : queryString).split( '&' );
     
+    //separate key-value pairs of parsed query
     for ( var indexOfQuery = 0; indexOfQuery < query.length; indexOfQueryy++ ) {
         var queryPart = query[indexOfa].split('=');
         queryArray[decodeURIComponent(queryPart[0])] = decodeURIComponent(queryPart[1] || '');
