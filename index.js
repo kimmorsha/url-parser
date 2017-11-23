@@ -12,5 +12,5 @@ app.get('/unittest', function (request, response) {
 });
 app.listen(3000, function () {
 	console.log('Server is now listening at port 3000');
-});
+})
 
