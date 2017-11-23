@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express(); 
 const router = new express.Router();
+const consolidate = require('consolidate');
+app.engine('html', consolidate.nunjucks);
 
 app.use('/static', express.static('./static'));
 app.set('views', './templates');
