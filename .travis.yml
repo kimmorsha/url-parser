@@ -1,14 +1,15 @@
 language: node_js
+
 node_js:
-  - "stable"
+  - "7"
   
-install:
-  - npm install
+install: true
   
 script:
   - npm test
 
 notification: 
   email: 
-    - kdzaldua@up.edu.ph
-    - arpacada@up.edu.ph
+    recipients:
+      - kdzaldua@up.edu.ph
+      - arpacada@up.edu.ph
