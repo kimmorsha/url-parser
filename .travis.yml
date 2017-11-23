@@ -3,7 +3,8 @@ language: node_js
 node_js:
   - "7"
   
-install: true
+install: 
+  - npm install
   
 script:
   - npm test
@@ -13,3 +14,4 @@ notification:
     recipients:
       - kdzaldua@up.edu.ph
       - arpacada@up.edu.ph
+      - mmmeguillo@up.edu.ph
