@@ -7,3 +7,8 @@ install:
   
 script:
   - npm test
+
+notification: 
+  email: 
+    - kdzaldua@up.edu.ph
+    - arpacada@up.edu.ph
