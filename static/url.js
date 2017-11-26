@@ -35,7 +35,6 @@ $('form').on('submit', function(e) {
 		document.getElementById("fragment").innerHTML = "fragment: " + parsedUrl.fragment
 
 		input.val('');
-
 	}
 });
 
