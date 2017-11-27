@@ -4,11 +4,9 @@ var urlparser = require('./urlparser.js');
 var parser = new urlparser();
 
 function addMessage( urlString ) {
-	console.log("addMessage" + urlString)
 	ol.empty();
 	ol.append('<li>' + urlString + '</li>');
 }
-
 
 $('button[type]').on('click', function(e) {
 
@@ -16,9 +14,7 @@ $('button[type]').on('click', function(e) {
 	sendMessage( e.target.textContent );
 });
 
-
 var input = $('input');
-
 
 $('form').on('submit', function(e) {
 	e.preventDefault();
@@ -37,7 +33,6 @@ $('form').on('submit', function(e) {
 		input.val('');
 	}
 });
-
 
 function iterateQuery( query ) {
 	var queryHtml = "<br>"
