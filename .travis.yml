@@ -15,3 +15,10 @@ notification:
       - kdzaldua@up.edu.ph
       - arpacada@up.edu.ph
       - mmmeguillo@up.edu.ph
+      
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: 139b908d3f7752dc3938c4e7ed450252cc6039cb
+  on:
+    branch: development
