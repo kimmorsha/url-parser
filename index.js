@@ -272,3 +272,5 @@ function getFragment(url) {
 function helpParser() {
 	return document.createElement('a');
 }
+
+module.exports = getScheme;
