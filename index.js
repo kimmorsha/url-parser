@@ -111,7 +111,7 @@ function parse(url) {
 	return obj;
 }
 
-function getScheme(url) {
+var getScheme = function(url) {
 	parser = helpParser();
 	parser.href = url;
 
