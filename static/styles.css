@@ -7,6 +7,7 @@ body {
 	font-family: sans-serif;
 	color: #333;
 	background-color: #eee;
+	
 }
 
 
@@ -26,7 +27,7 @@ section {
 
 
 ol {
-	height:80px;
+	height:50px;
 	margin: 0;
 	padding: 20px;
 	list-style: none;
@@ -58,4 +59,12 @@ form {
 input {
 	flex-grow: 1;
 	padding: 0.5em;
+}
+
+.leftpadding{
+	padding-left: 1em;
+}
+
+a {
+	font-size: 12px
 }

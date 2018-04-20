@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "requires": true,
   "lockfileVersion": 1,
   "dependencies": {
@@ -96,5 +97,35 @@
   },
   "devDependencies": {
     "jasmine": "^3.1.0"
+=======
+  "name": "url-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kimmorsha/url-parser.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kimmorsha/url-parser/issues"
+  },
+  "homepage": "https://github.com/kimmorsha/url-parser#readme",
+  "dependencies": {
+    "browserify": "^14.5.0",
+    "chai": "^4.1.2",
+    "consolidate": "^0.15.0",
+    "express": "^4.16.2",
+    "jsdom": "^11.4.0",
+    "mocha": "^4.0.1"
+  },
+  "devDependencies": {
+    "jsdom": "11.4.0",
+    "jsdom-global": "3.0.2"
+>>>>>>> 2c29c69ec4b6e3cbb5b5cb61d7c78a37e5d81511
   }
 }
