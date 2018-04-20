@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "mocha"
-  },
+  "scripts": { 
+    "test": "jasmine" 
+  }
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kimmorsha/url-parser.git"
