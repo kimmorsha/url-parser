@@ -39,6 +39,7 @@
       "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.2.tgz",
       "version": "7.1.2"
     },
+    "global-jsdom": "^4.2.0",
     "inflight": {
       "integrity": "sha1-Sb1jMdfQLQwJvJEKEHW6gWW1bfk=",
       "requires": {
@@ -58,6 +59,9 @@
       "resolved": "https://registry.npmjs.org/jasmine-core/-/jasmine-core-3.1.0.tgz",
       "version": "3.1.0"
     },
+    "jquery": "^3.3.1",
+    "jsdom": "^11.8.0",
+    "jsdom-global": "^3.0.2",
     "minimatch": {
       "integrity": "sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==",
       "requires": {

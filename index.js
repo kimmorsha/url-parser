@@ -1,5 +1,6 @@
+require('jsdom-global')()
+var $ = require('jquery')
 var ol = $('ol');
-
 function addMessage(urlString) {
     // Chat messages should be follow the set chat message template
     // (see index.html:15)
@@ -122,7 +123,7 @@ var getScheme = function(url) {
 
 	document.getElementById("scheme").innerHTML = "scheme: " + scheme
 	return scheme;
-}
+};
 
 function getUsername(url) {
 	parser = helpParser();
@@ -217,7 +218,7 @@ function getPath(url) {
 		return '/'
 	} else if ((path === '/') && isNotAfterSlash('?', url)) {
 		return ''
-	} else if ((path === '/') && isNotAfterSlash('#', url) {
+	} else if ((path === '/') && isNotAfterSlash('#', url)) {
 		return ''
 	} else if (path.match(/%[0-9a-f]{2}/i)) {
     	path = decodeURIComponent(path)
@@ -273,4 +274,6 @@ function helpParser() {
 	return document.createElement('a');
 }
 
-module.exports = getScheme;
+exports.sample = function(){
+	return "hello"
+}
