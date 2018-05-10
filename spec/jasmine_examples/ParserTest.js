@@ -20,4 +20,18 @@ describe("Scheme checker", function() {
     // demonstrates use of 'not' with a custom matcher
     expect(scheme).toEqual("https");
   });
+  
+  it('should return correct scheme', function() {
+    var validurl = 'file:///home/arnelle/Documents/example.txt';
+    var scheme = scheme_thing(validurl);
+
+    expect(scheme).toEqual("file");
+  });
+  
+  it('should return correct scheme', function() {
+    var validurl = 'mailto:arnellebalane@gmail.com';
+    var scheme = scheme_thing(validurl);
+
+    expect(scheme).toEqual("mailto"); 
+  });
 });
