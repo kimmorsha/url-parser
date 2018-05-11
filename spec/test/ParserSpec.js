@@ -8,15 +8,12 @@ describe("Scheme checker", function() {
   it("should return correct scheme", function() {
     var validurl = 'http://jack:blarney@www.foo.com/bar/foo/acme?stuff=thing&foo=bar&blarg=snoggle#place';
     var scheme = urlParser.getScheme(validurl);
-    
     expect(scheme).toEqual("http");
   });
 
   it("should return correct 'https' scheme", function() {
     var validurl = 'https://domain.com?poo=javascript%20decode%20uri%20%2B%20sign%20to%20space';
     var scheme = urlParser.getScheme(validurl);
-
-    // demonstrates use of 'not' with a custom matcher
     expect(scheme).toEqual("https");
   });
   
@@ -46,22 +43,21 @@ describe("Port checker", function() {
     var validurl = 'http://jack:blarney@www.foo.com/bar/foo/acme?stuff=thing&foo=bar&blarg=snoggle#place';
     var port = urlParser.getPort(validurl);
     
-    expect(scheme).toEqual("80");
+    expect(port).toEqual("80");
   });
   
   it('getPort() should return correct port if it is explicitly shown in the url.', function() {
     var validurl = 'http://atpass:foo%40bar@127.0.0.1:8080/path?search=foo#bar';
     var port = urlParser.getPort(validurl);
     
-    expect(scheme).toEqual("8080");
+    expect(port).toEqual("8080");
      
   });
   
   it('getPort() should return "null" if host is not present', function() {
     var validurl = 'madeupscheme:/example.com/';
     var port = urlParser.getPort(validurl);
-    
-    expect(scheme).toEqual(null);
+    expect(port).toEqual(null);
   });
 });
 
@@ -74,15 +70,14 @@ describe("Path checker", function() {
   
   it('should return correct path', function() {
     var validurl = 'http://jack:blarney@www.foo.com/bar/foo/acme?stuff=thing&foo=bar&blarg=snoggle#place';
-    var port = urlParser.getPort(validurl);
-    
-    expect(scheme).toEqual('/bar/foo/acme');
+    var path= urlParser.getPath(validurl)
+    expect(path).toEqual('/bar/foo/acme');
   });
   
   it('should return an empty string if path is not present', function() {
-    var url = 'http://domain.com?poo=javascript%20decode%20uri%20%2B%20sign%20to%20space';
-    var port = urlParser.getPort(validurl);
+    var validurl = 'http://domain.com?poo=javascript%20decode%20uri%20%2B%20sign%20to%20space';
+    var path = urlParser.getPath(validurl);
     
-    expect(scheme).toEqual("");
+    expect(path).toEqual("");
   });
 });
